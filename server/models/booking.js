@@ -8,26 +8,10 @@ const bookingSchema = new mongoose.Schema(
       required: true,
     },
 
-    customerName: {
-      type: String,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-      trim: true,
-    },
-
-    customerEmail: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    customerPhone: {
-      type: String,
-      required: true,
-      trim: true,
-    },
-    customerAddress: {
-        type: String,
-        required: true,
-        trim: true,
     },
 
     pickupDate: {
