@@ -1,6 +1,6 @@
 const Booking = require("../models/booking");
-const Cars = require("../models/Cars");
-
+const Car = require("../models/Cars");
+const User = require("../models/User");
 
 const getBookings = async (req, res) => {
   try {
@@ -19,7 +19,6 @@ const getBookings = async (req, res) => {
     });
   }
 };
-
 
 const getBookingById = async (req, res) => {
   try {
@@ -46,7 +45,6 @@ const getBookingById = async (req, res) => {
   }
 };
 
-
 const createBooking = async (req, res) => {
   try {
     const {
@@ -65,7 +63,7 @@ const createBooking = async (req, res) => {
       });
     }
 
-    const carDetails = await Cars.findById(car);
+    const carDetails = await Car.findById(car);
 
     if (!carDetails) {
       return res.status(404).json({
@@ -91,7 +89,6 @@ const createBooking = async (req, res) => {
       });
     }
 
-
     const overlappingBookings = await Booking.find({
       car,
       status: {
@@ -104,7 +101,6 @@ const createBooking = async (req, res) => {
         $gt: pickup,
       },
     });
-
 
     const sameDayBooking = await Booking.findOne({
       car,
@@ -125,7 +121,6 @@ const createBooking = async (req, res) => {
         message: "This car is already booked for the selected dates",
       });
     }
-
 
     const totalDays = Math.max(
       1,
@@ -186,7 +181,7 @@ const updateBooking = async (req, res) => {
 
     const carId = car || booking.car;
 
-    const carDetails = await Cars.findById(carId);
+    const carDetails = await Car.findById(carId);
 
     if (!carDetails) {
       return res.status(404).json({
@@ -210,7 +205,6 @@ const updateBooking = async (req, res) => {
       });
     }
 
-    
     const overlappingBookings = await Booking.find({
       _id: {
         $ne: booking._id,
@@ -226,7 +220,6 @@ const updateBooking = async (req, res) => {
         $gt: pickup,
       },
     });
-
 
     const sameDayBooking = await Booking.findOne({
       _id: {
@@ -250,7 +243,6 @@ const updateBooking = async (req, res) => {
         message: "This car is already booked for the selected dates",
       });
     }
-
 
     const totalDays = Math.max(
       1,
@@ -292,7 +284,6 @@ const updateBooking = async (req, res) => {
     });
   }
 };
-
 
 const deleteBooking = async (req, res) => {
   try {
