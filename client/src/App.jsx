@@ -55,7 +55,7 @@ function App() {
   const [showRegister, setShowRegister] = useState(false);
 
   useEffect(() => {
-    fetch("https://car-rental-online-seven.vercel.app/api/cars")
+    fetch("https://car-rental-online-ashen.vercel.app/api/cars")
       .then((response) => response.json())
       .then((data) => {
         setCars(data.cars);
@@ -157,8 +157,8 @@ function App() {
       };
 
       const url = editingCarId
-        ? `https://car-rental-online-seven.vercel.app/api/cars/${editingCarId}`
-        : "https://car-rental-online-seven.vercel.app/api/cars";
+        ? `https://car-rental-online-ashen.vercel.app/api/cars/${editingCarId}`
+        : "https://car-rental-online-ashen.vercel.app/api/cars";
 
       const token = localStorage.getItem("token");
 
@@ -223,7 +223,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://car-rental-online-seven.vercel.app/api/cars/${id}`,
+        `https://car-rental-online-ashen.vercel.app/api/cars/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -396,7 +396,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/bookings",
+        "https://car-rental-online-ashen.vercel.app/api/bookings",
         {
           method: "POST",
           headers: {
@@ -435,7 +435,7 @@ function App() {
         loadBookings();
 
         const carsResponse = await fetch(
-          "https://car-rental-online-seven.vercel.app/api/cars"
+          "https://car-rental-online-ashen.vercel.app/api/cars"
         );
 
         const carsData = await carsResponse.json();
@@ -459,7 +459,7 @@ function App() {
   const loadBookings = async () => {
     try {
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/bookings"
+        "https://car-rental-online-ashen.vercel.app/api/bookings"
       );
 
       const data = await response.json();
@@ -484,7 +484,7 @@ function App() {
   const handleCancelBooking = async (id) => {
     try {
       const response = await fetch(
-        `https://car-rental-online-seven.vercel.app/api/bookings/${id}`,
+        `https://car-rental-online-ashen.vercel.app/api/bookings/${id}`,
         {
           method: "DELETE",
         }
@@ -502,7 +502,7 @@ function App() {
         setMessage("Booking cancelled successfully!");
         
         const carsResponse = await fetch(
-          "https://car-rental-online-seven.vercel.app/api/cars"
+          "https://car-rental-online-ashen.vercel.app/api/cars"
         );
 
         const carsData = await carsResponse.json();
@@ -530,7 +530,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/users",
+        "https://car-rental-online-ashen.vercel.app/api/users",
         {
           method: "POST",
           headers: {
@@ -591,7 +591,7 @@ function App() {
 
     try {
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/users/login",
+        "https://car-rental-online-ashen.vercel.app/api/users/login",
         {
           method: "POST",
           headers: {
@@ -638,7 +638,7 @@ function App() {
   const fetchAllCars = async () => {
     try {
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/cars"
+        "https://car-rental-online-ashen.vercel.app/api/cars"
       );
 
       const data = await response.json();
@@ -660,7 +660,7 @@ function App() {
       if (!token) return;
 
       const response = await fetch(
-        "https://car-rental-online-seven.vercel.app/api/cars/my-cars",
+        "https://car-rental-online-ashen.vercel.app/api/cars/my-cars",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -689,7 +689,7 @@ function App() {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `https://car-rental-online-seven.vercel.app/api/users/${loggedInUser._id}`,
+        `https://car-rental-online-ashen.vercel.app/api/users/${loggedInUser._id}`,
         {
           method: "DELETE",
           headers: {
