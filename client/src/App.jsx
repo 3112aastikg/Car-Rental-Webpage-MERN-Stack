@@ -404,10 +404,7 @@ function App() {
           },
           body: JSON.stringify({
             car: bookingCar._id,
-            customerName: bookingData.customerName,
-            customerEmail: bookingData.customerEmail,
-            customerPhone: bookingData.customerPhone,
-            customerAddress: bookingData.customerAddress,
+            user: loggedInUser._id,
             pickupDate: bookingData.pickupDate,
             returnDate: bookingData.returnDate,
             totalDays: totalDays,
@@ -1402,19 +1399,15 @@ function App() {
                 </h3>
 
                 <p>
-                  Customer: {booking.customerName}
+                  Customer: {booking.user?.name}
                 </p>
 
                 <p>
-                  Email: {booking.customerEmail}
+                  Email: {booking.user?.email}
                 </p>
 
                 <p>
-                  Phone: {booking.customerPhone}
-                </p>
-
-                <p>
-                  Address: {booking.customerAddress}
+                  Phone: {booking.user?.phone}
                 </p>
 
                 <p>
