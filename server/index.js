@@ -8,6 +8,9 @@ const carRoutes = require("./routes/carRoutes");
 const bookingRoutes = require("./routes/bookingRoutes");
 const userroutes = require("./routes/userroutes");
 
+require("./models/Cars");
+require("./models/User");
+
 const app = express();
 
 app.use(cors());
