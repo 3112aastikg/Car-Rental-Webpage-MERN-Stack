@@ -5,8 +5,15 @@ const User = require("../models/User");
 const getBookings = async (req, res) => {
   try {
     const bookings = await Booking.find()
-      .populate("car")
-      .populate("user", "name email phone");
+      .populate({
+        path: "car",
+        model: Car,
+      })
+      .populate({
+        path: "user",
+        model: User,
+        select: "name email phone",
+      });
 
     res.status(200).json({
       success: true,
@@ -23,8 +30,15 @@ const getBookings = async (req, res) => {
 const getBookingById = async (req, res) => {
   try {
     const booking = await Booking.findById(req.params.id)
-      .populate("car")
-      .populate("user", "name email phone");
+      .populate({
+        path: "car",
+        model: Car,
+      })
+      .populate({
+        path: "user",
+        model: User,
+        select: "name email phone",
+      });
 
     if (!booking) {
       return res.status(404).json({
@@ -52,7 +66,6 @@ const createBooking = async (req, res) => {
       user,
       pickupDate,
       returnDate,
-      totalPrice,
       status,
     } = req.body;
 
@@ -81,6 +94,13 @@ const createBooking = async (req, res) => {
 
     const pickup = new Date(pickupDate);
     const returnDateValue = new Date(returnDate);
+
+    if (isNaN(pickup.getTime()) || isNaN(returnDateValue.getTime())) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid pickup or return date",
+      });
+    }
 
     if (returnDateValue < pickup) {
       return res.status(400).json({
@@ -144,8 +164,15 @@ const createBooking = async (req, res) => {
     });
 
     const populatedBooking = await Booking.findById(booking._id)
-      .populate("car")
-      .populate("user", "name email phone");
+      .populate({
+        path: "car",
+        model: Car,
+      })
+      .populate({
+        path: "user",
+        model: User,
+        select: "name email phone",
+      });
 
     res.status(201).json({
       success: true,
@@ -197,6 +224,16 @@ const updateBooking = async (req, res) => {
     const returnDateValue = new Date(
       returnDate || booking.returnDate
     );
+
+    if (
+      isNaN(pickup.getTime()) ||
+      isNaN(returnDateValue.getTime())
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid pickup or return date",
+      });
+    }
 
     if (returnDateValue < pickup) {
       return res.status(400).json({
@@ -269,8 +306,15 @@ const updateBooking = async (req, res) => {
     await booking.save();
 
     const updatedBooking = await Booking.findById(booking._id)
-      .populate("car")
-      .populate("user", "name email phone");
+      .populate({
+        path: "car",
+        model: Car,
+      })
+      .populate({
+        path: "user",
+        model: User,
+        select: "name email phone",
+      });
 
     res.status(200).json({
       success: true,
